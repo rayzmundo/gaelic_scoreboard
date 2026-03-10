@@ -2,6 +2,11 @@
 
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.1.3.
 
+A gaelic football scoreboard with the addition of the new 2 point score.
+Red card and black cards.
+
+![GAA Scoreboard](/readme_img/scoreboard.png?raw=true 'GAA Scoreboard for streaming')
+
 ## Development server
 
 To start a local development server, run:
@@ -17,7 +22,7 @@ Once the server is running, open your browser and navigate to `http://localhost:
 Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
 
 ```bash
-ng generate component component-name
+ng generate component component-name/Users/rayz/development/gaelic-scoreboard/readme_img/scoreboard.png
 ```
 
 For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
@@ -30,7 +35,6 @@ ng generate --help
 
 To build the project run:
 
-```bash
 ng build
 ```
 
