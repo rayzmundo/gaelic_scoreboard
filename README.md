@@ -1,63 +1,62 @@
-# GaelicScoreboard
+# Gaelic Scoreboard
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.1.3.
-
-A gaelic football scoreboard with the addition of the new 2 point score.
-Red card and black cards.
+A browser-based scoreboard for Gaelic football, built for live streaming overlays and match day use.
 
 ![GAA Scoreboard](/readme_img/scoreboard.png?raw=true 'GAA Scoreboard for streaming')
 
-## Development server
+## Features
 
-To start a local development server, run:
+- **Score tracking** — Goals, 2-pointers, and points for both home and away teams, with automatic total calculation (goal = 3pts, 2-pointer = 2pts)
+- **Live timer** — Start, stop, and reset with manual time entry; highlights red when overrunning (30:00 in 1st half, 60:00 in 2nd half)
+- **Half indicator** — Toggle between 1st and 2nd half with a single click, auto-setting the timer
+- **Cards** — Black and red card counters per team, displayed on the scoreboard with count badges when more than one
+- **Team customisation** — Editable team names and colour-picker for each team's scoreboard badge
+- **Persistent state** — All scores, names, colours, cards, and half are saved to localStorage and restored on page refresh
 
-```bash
-ng serve
-```
+## Tech Stack
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+- [Angular 21](https://angular.dev) — single-component app using Angular Signals for reactive state
+- TypeScript
+- CSS (no external UI library)
 
-## Code scaffolding
+## Installation
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name/Users/rayz/development/gaelic-scoreboard/readme_img/scoreboard.png
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
+Requires [Node.js](https://nodejs.org) (v18+) and npm.
 
 ```bash
-ng test
+# Clone the repo
+git clone https://github.com/YOUR_USERNAME/gaelic-scoreboard.git
+cd gaelic-scoreboard
+
+# Install dependencies
+npm install
 ```
 
-## Running end-to-end tests
+## Usage
 
-For end-to-end (e2e) testing, run:
-
+**Development server**
 ```bash
-ng e2e
+npm start
+# or
+npx ng serve
+```
+Open [http://localhost:4200](http://localhost:4200) in your browser.
+
+**Production build**
+```bash
+npm run build
+# Output is in the dist/ directory
 ```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+### Scoreboard tab
+- Enter team names in the text inputs
+- Use **+** / **-** buttons to adjust Goals, 2-Pointers, and Points
+- Use the timer controls to start/stop the clock or jump to a specific half
+- Add black/red cards per team as needed
 
-## Additional Resources
+### Options tab
+- Pick a background colour for each team's name badge on the scoreboard
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+## License
+
+MIT
