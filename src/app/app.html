@@ -1,0 +1,214 @@
+<!-- Scoreboard Display Bar -->
+<div class="scoreboard-bar">
+  <div class="scoreboard-inner">
+    <span class="half-indicator">{{ half() === 1 ? '1st' : '2nd' }}</span>
+    <span class="time-display" [class.time-overrun]="timeOverrun()">{{ timeDisplay() }}</span>
+    <span class="team-name-wrapper">
+      <span class="team-name" [style.background-color]="team1Color()">{{ team1Name() }}</span>
+      @if (team1BlackCards() > 0 || team1RedCards() > 0) {
+        <span class="scoreboard-cards">
+          @if (team1BlackCards() > 0) {
+            <span class="card-icon card-black">
+              @if (team1BlackCards() > 1) {
+                {{ team1BlackCards() }}
+              }
+            </span>
+          }
+          @if (team1RedCards() > 0) {
+            <span class="card-icon card-red">
+              @if (team1RedCards() > 1) {
+                {{ team1RedCards() }}
+              }
+            </span>
+          }
+        </span>
+      }
+    </span>
+
+    <span class="score">{{ formatScore(team1Goals(), team1TwoPointers(), team1Points()) }}</span>
+    <span class="total-points">({{ team1Total() }})</span>
+
+    <span class="score">{{ formatScore(team2Goals(), team2TwoPointers(), team2Points()) }}</span>
+    <span class="total-points">({{ team2Total() }})</span>
+
+    <span class="team-name-wrapper">
+      <span class="team-name" [style.background-color]="team2Color()">{{ team2Name() }}</span>
+      @if (team2BlackCards() > 0 || team2RedCards() > 0) {
+        <span class="scoreboard-cards">
+          @if (team2BlackCards() > 0) {
+            <span class="card-icon card-black">
+              @if (team2BlackCards() > 1) {
+                {{ team2BlackCards() }}
+              }
+            </span>
+          }
+          @if (team2RedCards() > 0) {
+            <span class="card-icon card-red">
+              @if (team2RedCards() > 1) {
+                {{ team2RedCards() }}
+              }
+            </span>
+          }
+        </span>
+      }
+    </span>
+  </div>
+</div>
+
+<!-- Tabs -->
+<div class="tabs">
+  <button class="tab" [class.active]="activeTab() === 'scoreboard'" (click)="setTab('scoreboard')">
+    Scoreboard
+  </button>
+  <button class="tab" [class.active]="activeTab() === 'options'" (click)="setTab('options')">
+    Options
+  </button>
+</div>
+
+<!-- Scoreboard Tab -->
+@if (activeTab() === 'scoreboard') {
+  <div class="config-panel">
+    <!-- Teams/Scores Section -->
+    <div class="config-section">
+      <h3>Teams/Scores</h3>
+      <div class="team-row score-header-row">
+        <label class="team-label"></label>
+        <span class="team-input-spacer"></span>
+        <span class="score-group-header">Goals</span>
+        @if (showTwoPointers()) {
+          <span class="score-group-header">2 Pointers</span>
+        }
+        <span class="score-group-header">Points</span>
+      </div>
+      <div class="team-row">
+        <label class="team-label">Home</label>
+        <input
+          type="text"
+          [value]="team1Name()"
+          (input)="setTeam1Name($any($event.target).value)"
+          class="team-input"
+        />
+        <span class="score-value">{{ team1Goals() }}</span>
+        <button class="btn-sm" (click)="adjustGoals(1, 1)">+</button>
+        <button class="btn-sm" (click)="adjustGoals(1, -1)">-</button>
+        <span class="score-separator">-</span>
+        @if (showTwoPointers()) {
+          <span class="score-value">{{ padTwo(team1TwoPointers()) }}</span>
+        }
+        @if (showTwoPointers()) {
+          <button class="btn-sm" (click)="adjustTwoPointers(1, 1)">+</button>
+          <button class="btn-sm" (click)="adjustTwoPointers(1, -1)">-</button>
+        }
+        <span class="score-separator">-</span>
+        <span class="score-value">{{ padTwo(team1Points()) }}</span>
+        <button class="btn-sm" (click)="adjustPoints(1, 1)">+</button>
+        <button class="btn-sm" (click)="adjustPoints(1, -1)">-</button>
+      </div>
+      <div class="team-row">
+        <label class="team-label">Away</label>
+        <input
+          type="text"
+          [value]="team2Name()"
+          (input)="setTeam2Name($any($event.target).value)"
+          class="team-input"
+        />
+        <span class="score-value">{{ team2Goals() }}</span>
+        <button class="btn-sm" (click)="adjustGoals(2, 1)">+</button>
+        <button class="btn-sm" (click)="adjustGoals(2, -1)">-</button>
+        <span class="score-separator">-</span>
+        @if (showTwoPointers()) {
+          <span class="score-value">{{ padTwo(team2TwoPointers()) }}</span>
+        }
+        @if (showTwoPointers()) {
+          <button class="btn-sm" (click)="adjustTwoPointers(2, 1)">+</button>
+          <button class="btn-sm" (click)="adjustTwoPointers(2, -1)">-</button>
+        }
+        <span class="score-separator">-</span>
+        <span class="score-value">{{ padTwo(team2Points()) }}</span>
+        <button class="btn-sm" (click)="adjustPoints(2, 1)">+</button>
+        <button class="btn-sm" (click)="adjustPoints(2, -1)">-</button>
+      </div>
+    </div>
+
+    <!-- Cards Section -->
+    <div class="config-section">
+      <h3>Cards</h3>
+      <div class="team-row">
+        <label class="team-label">team 1</label>
+        <span class="card-badge card-black-badge">Black</span>
+        <button class="btn-sm" (click)="adjustCard(1, 'black', 1)">+</button>
+        <button class="btn-sm" (click)="adjustCard(1, 'black', -1)">-</button>
+        <span class="card-badge card-red-badge">Red</span>
+        <button class="btn-sm" (click)="adjustCard(1, 'red', 1)">+</button>
+        <button class="btn-sm" (click)="adjustCard(1, 'red', -1)">-</button>
+      </div>
+      <div class="team-row">
+        <label class="team-label">team 2</label>
+        <span class="card-badge card-black-badge">Black</span>
+        <button class="btn-sm" (click)="adjustCard(2, 'black', 1)">+</button>
+        <button class="btn-sm" (click)="adjustCard(2, 'black', -1)">-</button>
+        <span class="card-badge card-red-badge">Red</span>
+        <button class="btn-sm" (click)="adjustCard(2, 'red', 1)">+</button>
+        <button class="btn-sm" (click)="adjustCard(2, 'red', -1)">-</button>
+      </div>
+    </div>
+
+    <!-- Time Section -->
+    <div class="config-section">
+      <h3>Time</h3>
+      <div class="time-controls">
+        <input
+          type="text"
+          [value]="timeInput()"
+          (input)="timeInput.set($any($event.target).value)"
+          class="time-input"
+        />
+      </div>
+      <div class="time-controls">
+        <button class="btn" (click)="startTimer()">&#9654; Start</button>
+        <button class="btn" (click)="stopTimer()">&#9632; Stop</button>
+        <button class="btn" (click)="resetTimer()">&#8635; reset</button>
+      </div>
+      <div class="time-controls">
+        <button class="btn" (click)="setFirstHalf()">Set First half</button>
+        <button class="btn" (click)="setSecondHalf()">Set Second half</button>
+      </div>
+    </div>
+  </div>
+}
+
+<!-- Options Tab -->
+@if (activeTab() === 'options') {
+  <div class="config-panel">
+    <div class="config-section">
+      <h3>Team Colors</h3>
+      <div class="color-row">
+        <label>{{ team1Name() }} background:</label>
+        <input
+          type="color"
+          [value]="team1Color()"
+          (input)="setTeam1Color($any($event.target).value)"
+        />
+      </div>
+      <div class="color-row">
+        <label>{{ team2Name() }} background:</label>
+        <input
+          type="color"
+          [value]="team2Color()"
+          (input)="setTeam2Color($any($event.target).value)"
+        />
+      </div>
+    </div>
+    <div class="config-section">
+      <h3>Display</h3>
+      <div class="color-row">
+        <label>Show 2 Pointers:</label>
+        <input
+          type="checkbox"
+          [checked]="showTwoPointers()"
+          (change)="setShowTwoPointers($any($event.target).checked)"
+        />
+      </div>
+    </div>
+  </div>
+}
