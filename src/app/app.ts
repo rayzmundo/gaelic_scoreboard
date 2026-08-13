@@ -31,6 +31,8 @@ export class App implements OnDestroy {
   // Team 1 score
   team1Goals = signal(0);
   team1TwoPointers = signal(0);
+  // Toggle to show or hide 2-pointers in the UI (keeps counting intact)
+  showTwoPointers = signal(true);
   team1Points = signal(0);
   team1Total = computed(() => this.team1Goals() * 3 + this.team1TwoPointers() * 2 + this.team1Points());
 
@@ -64,7 +66,11 @@ export class App implements OnDestroy {
 
   // Score display helpers
   formatScore(goals: number, twoPointers: number, points: number): string {
-    return goals + '-' + this.padTwo(twoPointers) + '-' + this.padTwo(points);
+    if (this.showTwoPointers()) {
+      return goals + '-' + this.padTwo(twoPointers) + '-' + this.padTwo(points);
+    }
+    // Old Gaelic view: show goals and points only
+    return goals + '-' + this.padTwo(points);
   }
 
   padTwo(n: number): string {
@@ -81,6 +87,8 @@ export class App implements OnDestroy {
   setTeam2Name(value: string) { this.team2Name.set(value); this.saveState(); }
   setTeam1Color(value: string) { this.team1Color.set(value); this.saveState(); }
   setTeam2Color(value: string) { this.team2Color.set(value); this.saveState(); }
+
+  setShowTwoPointers(value: boolean) { this.showTwoPointers.set(!!value); this.saveState(); }
 
   // Score adjustments
   adjustGoals(team: 1 | 2, delta: number) {
@@ -200,6 +208,7 @@ export class App implements OnDestroy {
       team1RedCards: this.team1RedCards(),
       team2BlackCards: this.team2BlackCards(),
       team2RedCards: this.team2RedCards(),
+      showTwoPointers: this.showTwoPointers(),
       half: this.half(),
     };
     localStorage.setItem(this.storageKey, JSON.stringify(state));
@@ -224,6 +233,7 @@ export class App implements OnDestroy {
       if (s.team1RedCards !== undefined) this.team1RedCards.set(s.team1RedCards);
       if (s.team2BlackCards !== undefined) this.team2BlackCards.set(s.team2BlackCards);
       if (s.team2RedCards !== undefined) this.team2RedCards.set(s.team2RedCards);
+      if (s.showTwoPointers !== undefined) this.showTwoPointers.set(!!s.showTwoPointers);
       if (s.half !== undefined) this.half.set(s.half);
     } catch {
       // Ignore corrupt data

@@ -55,7 +55,9 @@
         <label class="team-label"></label>
         <span class="team-input-spacer"></span>
         <span class="score-group-header">Goals</span>
-        <span class="score-group-header">2 Pointers</span>
+        @if (showTwoPointers()) {
+          <span class="score-group-header">2 Pointers</span>
+        }
         <span class="score-group-header">Points</span>
       </div>
       <div class="team-row">
@@ -65,9 +67,13 @@
         <button class="btn-sm" (click)="adjustGoals(1, 1)">+</button>
         <button class="btn-sm" (click)="adjustGoals(1, -1)">-</button>
         <span class="score-separator">-</span>
-        <span class="score-value">{{ padTwo(team1TwoPointers()) }}</span>
-        <button class="btn-sm" (click)="adjustTwoPointers(1, 1)">+</button>
-        <button class="btn-sm" (click)="adjustTwoPointers(1, -1)">-</button>
+        @if (showTwoPointers()) {
+          <span class="score-value">{{ padTwo(team1TwoPointers()) }}</span>
+        }
+        @if (showTwoPointers()) {
+          <button class="btn-sm" (click)="adjustTwoPointers(1, 1)">+</button>
+          <button class="btn-sm" (click)="adjustTwoPointers(1, -1)">-</button>
+        }
         <span class="score-separator">-</span>
         <span class="score-value">{{ padTwo(team1Points()) }}</span>
         <button class="btn-sm" (click)="adjustPoints(1, 1)">+</button>
@@ -80,9 +86,13 @@
         <button class="btn-sm" (click)="adjustGoals(2, 1)">+</button>
         <button class="btn-sm" (click)="adjustGoals(2, -1)">-</button>
         <span class="score-separator">-</span>
-        <span class="score-value">{{ padTwo(team2TwoPointers()) }}</span>
-        <button class="btn-sm" (click)="adjustTwoPointers(2, 1)">+</button>
-        <button class="btn-sm" (click)="adjustTwoPointers(2, -1)">-</button>
+        @if (showTwoPointers()) {
+          <span class="score-value">{{ padTwo(team2TwoPointers()) }}</span>
+        }
+        @if (showTwoPointers()) {
+          <button class="btn-sm" (click)="adjustTwoPointers(2, 1)">+</button>
+          <button class="btn-sm" (click)="adjustTwoPointers(2, -1)">-</button>
+        }
         <span class="score-separator">-</span>
         <span class="score-value">{{ padTwo(team2Points()) }}</span>
         <button class="btn-sm" (click)="adjustPoints(2, 1)">+</button>
@@ -144,6 +154,13 @@
       <div class="color-row">
         <label>{{ team2Name() }} background:</label>
         <input type="color" [value]="team2Color()" (input)="setTeam2Color($any($event.target).value)" />
+      </div>
+    </div>
+    <div class="config-section">
+      <h3>Display</h3>
+      <div class="color-row">
+        <label>Show 2 Pointers:</label>
+        <input type="checkbox" [checked]="showTwoPointers()" (change)="setShowTwoPointers($any($event.target).checked)" />
       </div>
     </div>
   </div>

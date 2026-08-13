@@ -57,6 +57,11 @@ npm run build
 ### Options tab
 - Pick a background colour for each team's name badge on the scoreboard
 
+### 2-Pointers display toggle
+- The Options tab now includes a **Show 2 Pointers** checkbox. When checked, the scoreboard shows the numeric 2-pointer column and the 2-pointer increment/decrement buttons in the Scoreboard tab.
+- When unchecked, the numeric 2-pointer column and its +/- controls are hidden from the scoreboard view — the app will revert to the older-style Gaelic display showing only Goals and Points. The underlying 2-pointer counts remain saved and the total score calculation still includes 2-pointers (2 points each).
+
+
 ## License
 
 MIT
