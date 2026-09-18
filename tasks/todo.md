@@ -13,6 +13,7 @@
 - [x] Add card display on scoreboard (below scores with white border, count when > 1)
 - [x] Add time rules (red background over 30:00 in 1st half or 60:00 in 2nd half)
 - [x] Style to match reference image
+- [x] Set the newer scoreboard's surrounding canvas to chroma-key green for OBS
 - [x] Build and verify - no compilation errors
 
 ## LocalStorage Persistence
@@ -31,6 +32,10 @@
 - Build passes with zero errors
 
 ## Review
+
+### Chroma-Key Background Review
+- Changed `.scoreboard-bar-new` from white to standard chroma-key green (`#00ff00`) so OBS can remove the surrounding area while preserving the scoreboard content.
+- Angular build passes with the existing CSS size-budget warning.
 
 ### Summary of Changes
 All changes were made in 4 files within the Angular project:
