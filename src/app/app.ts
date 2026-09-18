@@ -145,6 +145,11 @@ export class App implements OnDestroy {
     this.team2SecondaryColor.set(value);
     this.saveState();
   }
+  normalizeColorHexInput(event: Event) {
+    const input = event.target as HTMLInputElement;
+    const hexDigits = input.value.replace(/[^0-9a-fA-F]/g, '').slice(0, 6);
+    input.value = '#' + hexDigits;
+  }
   setTeam2SecondaryColorHex(value: string) {
     if (/^#[0-9a-fA-F]{6}$/.test(value.trim())) {
       this.setTeam2SecondaryColor(value.trim().toLowerCase());

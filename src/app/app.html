@@ -260,6 +260,7 @@
             maxlength="7"
             placeholder="#008000"
             aria-label="{{ team1Name() }} primary color hex"
+            (input)="normalizeColorHexInput($event)"
             (change)="setTeam1ColorHex($any($event.target).value)"
             (keydown.enter)="$any($event.target).blur()"
           />
@@ -278,6 +279,7 @@
             maxlength="7"
             placeholder="#ffffff"
             aria-label="{{ team1Name() }} secondary color hex"
+            (input)="normalizeColorHexInput($event)"
             (change)="setTeam1SecondaryColorHex($any($event.target).value)"
             (keydown.enter)="$any($event.target).blur()"
           />
@@ -296,6 +298,7 @@
             maxlength="7"
             placeholder="#cc0000"
             aria-label="{{ team2Name() }} primary color hex"
+            (input)="normalizeColorHexInput($event)"
             (change)="setTeam2ColorHex($any($event.target).value)"
             (keydown.enter)="$any($event.target).blur()"
           />
@@ -314,6 +317,7 @@
             maxlength="7"
             placeholder="#ffffff"
             aria-label="{{ team2Name() }} secondary color hex"
+            (input)="normalizeColorHexInput($event)"
             (change)="setTeam2SecondaryColorHex($any($event.target).value)"
             (keydown.enter)="$any($event.target).blur()"
           />
