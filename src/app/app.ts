@@ -9,7 +9,7 @@ import { FormsModule } from '@angular/forms';
 })
 export class App implements OnDestroy {
   // Tab state
-  activeTab = signal<'scoreboard' | 'options'>('scoreboard');
+  activeTab = signal<'scoreboard' | 'new-scoreboard'>('scoreboard');
 
   // Half indicator
   half = signal<1 | 2>(1);
@@ -26,7 +26,15 @@ export class App implements OnDestroy {
 
   // Team colors
   team1Color = signal('#008000');
+  team1SecondaryColor = signal('#ffffff');
   team2Color = signal('#cc0000');
+  team2SecondaryColor = signal('#ffffff');
+  team1ColorStyle = computed(
+    () => `linear-gradient(180deg, ${this.team1Color()} 0 90%, ${this.team1SecondaryColor()} 90% 100%)`,
+  );
+  team2ColorStyle = computed(
+    () => `linear-gradient(180deg, ${this.team2Color()} 0 90%, ${this.team2SecondaryColor()} 90% 100%)`,
+  );
 
   // Team 1 score
   team1Goals = signal(0);
@@ -81,8 +89,12 @@ export class App implements OnDestroy {
     return n < 10 ? '0' + n : '' + n;
   }
 
+  teamNameTextColor(teamColor: string): string {
+    return teamColor.toLowerCase() === '#ffffff' ? '#000' : '#fff';
+  }
+
   // Tab switching
-  setTab(tab: 'scoreboard' | 'options') {
+  setTab(tab: 'scoreboard' | 'new-scoreboard') {
     this.activeTab.set(tab);
   }
 
@@ -99,8 +111,16 @@ export class App implements OnDestroy {
     this.team1Color.set(value);
     this.saveState();
   }
+  setTeam1SecondaryColor(value: string) {
+    this.team1SecondaryColor.set(value);
+    this.saveState();
+  }
   setTeam2Color(value: string) {
     this.team2Color.set(value);
+    this.saveState();
+  }
+  setTeam2SecondaryColor(value: string) {
+    this.team2SecondaryColor.set(value);
     this.saveState();
   }
 
@@ -216,7 +236,9 @@ export class App implements OnDestroy {
       team1Name: this.team1Name(),
       team2Name: this.team2Name(),
       team1Color: this.team1Color(),
+      team1SecondaryColor: this.team1SecondaryColor(),
       team2Color: this.team2Color(),
+      team2SecondaryColor: this.team2SecondaryColor(),
       team1Goals: this.team1Goals(),
       team1TwoPointers: this.team1TwoPointers(),
       team1Points: this.team1Points(),
@@ -241,7 +263,9 @@ export class App implements OnDestroy {
       if (s.team1Name !== undefined) this.team1Name.set(s.team1Name);
       if (s.team2Name !== undefined) this.team2Name.set(s.team2Name);
       if (s.team1Color !== undefined) this.team1Color.set(s.team1Color);
+      if (s.team1SecondaryColor !== undefined) this.team1SecondaryColor.set(s.team1SecondaryColor);
       if (s.team2Color !== undefined) this.team2Color.set(s.team2Color);
+      if (s.team2SecondaryColor !== undefined) this.team2SecondaryColor.set(s.team2SecondaryColor);
       if (s.team1Goals !== undefined) this.team1Goals.set(s.team1Goals);
       if (s.team1TwoPointers !== undefined) this.team1TwoPointers.set(s.team1TwoPointers);
       if (s.team1Points !== undefined) this.team1Points.set(s.team1Points);

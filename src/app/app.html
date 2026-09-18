@@ -1,10 +1,61 @@
+<!-- Tabs -->
+<div class="tabs">
+  <button class="tab" [class.active]="activeTab() === 'scoreboard'" (click)="setTab('scoreboard')">
+    Scoreboard
+  </button>
+  <button
+    class="tab"
+    [class.active]="activeTab() === 'new-scoreboard'"
+    (click)="setTab('new-scoreboard')"
+  >
+    Scoreboard 2
+  </button>
+</div>
+
 <!-- Scoreboard Display Bar -->
-<div class="scoreboard-bar">
+@if (activeTab() === 'scoreboard' || activeTab() === 'new-scoreboard') {
+<div
+  class="scoreboard-bar"
+  [class.scoreboard-bar-new]="activeTab() === 'new-scoreboard'"
+>
+  @if (activeTab() === 'new-scoreboard') {
+    <div class="scoreboard-2-layout">
+      <div class="scoreboard-2-main-row">
+        <span
+          class="scoreboard-2-team"
+          [style.background]="team1ColorStyle()"
+          [style.color]="teamNameTextColor(team1Color())"
+        >{{ team1Name() }}</span>
+        <span class="scoreboard-2-score">
+          <span>{{ formatScore(team1Goals(), team1TwoPointers(), team1Points()) }}</span>
+          <span class="scoreboard-2-total">({{ team1Total() }})</span>
+          <span class="scoreboard-2-divider">-</span>
+          <span class="scoreboard-2-total">({{ team2Total() }})</span>
+          <span>{{ formatScore(team2Goals(), team2TwoPointers(), team2Points()) }}</span>
+        </span>
+        <span
+          class="scoreboard-2-team"
+          [style.background]="team2ColorStyle()"
+          [style.color]="teamNameTextColor(team2Color())"
+        >{{ team2Name() }}</span>
+      </div>
+      <div class="scoreboard-2-status-row">
+        <span class="scoreboard-2-half">{{ half() === 1 ? '1st' : '2nd' }}</span>
+        <span class="scoreboard-2-time" [class.time-overrun]="timeOverrun()">
+          {{ timeDisplay() }}
+        </span>
+      </div>
+    </div>
+  } @else {
   <div class="scoreboard-inner">
     <span class="half-indicator">{{ half() === 1 ? '1st' : '2nd' }}</span>
     <span class="time-display" [class.time-overrun]="timeOverrun()">{{ timeDisplay() }}</span>
     <span class="team-name-wrapper">
-      <span class="team-name" [style.background-color]="team1Color()">{{ team1Name() }}</span>
+      <span
+        class="team-name"
+        [style.background]="team1ColorStyle()"
+        [style.color]="teamNameTextColor(team1Color())"
+      >{{ team1Name() }}</span>
       @if (team1BlackCards() > 0 || team1RedCards() > 0) {
         <span class="scoreboard-cards">
           @if (team1BlackCards() > 0) {
@@ -27,12 +78,15 @@
 
     <span class="score">{{ formatScore(team1Goals(), team1TwoPointers(), team1Points()) }}</span>
     <span class="total-points">({{ team1Total() }})</span>
-
-    <span class="score">{{ formatScore(team2Goals(), team2TwoPointers(), team2Points()) }}</span>
     <span class="total-points">({{ team2Total() }})</span>
+    <span class="score">{{ formatScore(team2Goals(), team2TwoPointers(), team2Points()) }}</span>
 
     <span class="team-name-wrapper">
-      <span class="team-name" [style.background-color]="team2Color()">{{ team2Name() }}</span>
+      <span
+        class="team-name"
+        [style.background]="team2ColorStyle()"
+        [style.color]="teamNameTextColor(team2Color())"
+      >{{ team2Name() }}</span>
       @if (team2BlackCards() > 0 || team2RedCards() > 0) {
         <span class="scoreboard-cards">
           @if (team2BlackCards() > 0) {
@@ -53,20 +107,12 @@
       }
     </span>
   </div>
+  }
 </div>
-
-<!-- Tabs -->
-<div class="tabs">
-  <button class="tab" [class.active]="activeTab() === 'scoreboard'" (click)="setTab('scoreboard')">
-    Scoreboard
-  </button>
-  <button class="tab" [class.active]="activeTab() === 'options'" (click)="setTab('options')">
-    Options
-  </button>
-</div>
+}
 
 <!-- Scoreboard Tab -->
-@if (activeTab() === 'scoreboard') {
+@if (activeTab() === 'scoreboard' || activeTab() === 'new-scoreboard') {
   <div class="config-panel">
     <!-- Teams/Scores Section -->
     <div class="config-section">
@@ -128,6 +174,54 @@
         <button class="btn-sm" (click)="adjustPoints(2, 1)">+</button>
         <button class="btn-sm" (click)="adjustPoints(2, -1)">-</button>
       </div>
+
+      <div class="config-divider"></div>
+
+      <!-- Team Colors Section -->
+      <div class="team-colors-section">
+        <h3>Team Colors</h3>
+        <div class="color-row">
+          <label>{{ team1Name() }} primary:</label>
+          <input
+            type="color"
+            [value]="team1Color()"
+            (input)="setTeam1Color($any($event.target).value)"
+          />
+        </div>
+        <div class="color-row">
+          <label>{{ team1Name() }} secondary:</label>
+          <input
+            type="color"
+            [value]="team1SecondaryColor()"
+            (input)="setTeam1SecondaryColor($any($event.target).value)"
+          />
+        </div>
+        <div class="color-row">
+          <label>{{ team2Name() }} primary:</label>
+          <input
+            type="color"
+            [value]="team2Color()"
+            (input)="setTeam2Color($any($event.target).value)"
+          />
+        </div>
+        <div class="color-row">
+          <label>{{ team2Name() }} secondary:</label>
+          <input
+            type="color"
+            [value]="team2SecondaryColor()"
+            (input)="setTeam2SecondaryColor($any($event.target).value)"
+          />
+        </div>
+        <div class="config-divider"></div>
+        <div class="color-row">
+          <label>Show 2 Pointers:</label>
+          <input
+            type="checkbox"
+            [checked]="showTwoPointers()"
+            (change)="setShowTwoPointers($any($event.target).checked)"
+          />
+        </div>
+      </div>
     </div>
 
     <!-- Cards Section -->
@@ -177,38 +271,3 @@
   </div>
 }
 
-<!-- Options Tab -->
-@if (activeTab() === 'options') {
-  <div class="config-panel">
-    <div class="config-section">
-      <h3>Team Colors</h3>
-      <div class="color-row">
-        <label>{{ team1Name() }} background:</label>
-        <input
-          type="color"
-          [value]="team1Color()"
-          (input)="setTeam1Color($any($event.target).value)"
-        />
-      </div>
-      <div class="color-row">
-        <label>{{ team2Name() }} background:</label>
-        <input
-          type="color"
-          [value]="team2Color()"
-          (input)="setTeam2Color($any($event.target).value)"
-        />
-      </div>
-    </div>
-    <div class="config-section">
-      <h3>Display</h3>
-      <div class="color-row">
-        <label>Show 2 Pointers:</label>
-        <input
-          type="checkbox"
-          [checked]="showTwoPointers()"
-          (change)="setShowTwoPointers($any($event.target).checked)"
-        />
-      </div>
-    </div>
-  </div>
-}
