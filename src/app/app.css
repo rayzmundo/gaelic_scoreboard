@@ -7,6 +7,11 @@
   box-shadow: 0 4px 24px rgba(0, 0, 0, 0.5);
 }
 
+.scoreboard-bar-new {
+  background: #00ff00;
+  box-shadow: none;
+}
+
 .scoreboard-inner {
   display: inline-flex;
   align-items: center;
@@ -17,13 +22,120 @@
   font-weight: bold;
 }
 
+.scoreboard-2-layout {
+  width: fit-content;
+  max-width: calc(100vw - 32px);
+  color: #fff;
+  font-weight: bold;
+}
+
+.scoreboard-2-main-row,
+.scoreboard-2-status-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.scoreboard-2-main-row {
+  gap: 8px;
+  padding: 10px 16px;
+  background: #111827;
+  border-top: 0;
+  border-radius: 14px;
+}
+
+.scoreboard-2-team {
+  padding: 8px 8px;
+  background: #334155;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  text-align: center;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.scoreboard-2-team-wrapper {
+  position: relative;
+  display: inline-flex;
+  flex: 0 1 auto;
+  max-width: 34%;
+  flex-direction: column;
+  align-items: center;
+}
+
+.scoreboard-2-cards {
+  position: absolute;
+  top: calc(100% - 10px);
+  right: 8px;
+  z-index: 2;
+  display: inline-flex;
+  justify-content: center;
+  gap: 4px;
+}
+
+.scoreboard-2-cards .card-icon {
+  width: 12px;
+  height: 17px;
+  border-width: 1px;
+  font-size: 0.6rem;
+  line-height: 17px;
+}
+
+.scoreboard-2-score {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 20px;
+  font-family: 'SF Mono', 'Fira Code', 'Courier New', monospace;
+  font-size: 1.5rem;
+  white-space: nowrap;
+}
+
+.scoreboard-2-total {
+  margin: 0 8px;
+  font-size: 2rem;
+}
+
+.scoreboard-2-divider {
+  margin: 0 4px;
+}
+
+.scoreboard-2-status-row {
+  gap: 10px;
+  width: fit-content;
+  margin: 0 auto -3px;
+  padding: 6px 14px 8px;
+  background: #111827;
+  border-bottom: 0;
+  border-radius: 12px 12px 0 0;
+}
+
+.scoreboard-2-time,
+.scoreboard-2-half {
+  padding: 4px 14px;
+  background: #1a1f2e;
+  color: #fff;
+  font-family: 'SF Mono', 'Fira Code', 'Courier New', monospace;
+  font-size: 1rem;
+}
+
+.scoreboard-2-time {
+  font-size: 1.75rem;
+}
+
+.scoreboard-2-half {
+  font-family: inherit;
+  font-size: 1.25rem;
+  text-transform: uppercase;
+}
+
 .half-indicator {
-  font-size: 0.7rem;
+  font-size: 1.25rem;
   font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: #94a3b8;
-  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+  background: #1a1f2e;
   padding: 4px 10px;
   border-radius: 20px;
   border: 1px solid rgba(255, 255, 255, 0.12);
@@ -31,10 +143,10 @@
 
 .time-display {
   font-family: 'SF Mono', 'Fira Code', 'Courier New', monospace;
-  font-size: 1.5rem;
+  font-size: 1.75rem;
   color: #f1f5f9;
   padding: 4px 12px;
-  background: rgba(255, 255, 255, 0.06);
+  background: #1a1f2e;
   border-radius: 6px;
   letter-spacing: 0.05em;
 }
@@ -46,7 +158,7 @@
 
 .team-name {
   padding: 6px 18px;
-  border-radius: 20px;
+  border-radius: 8px;
   color: #fff;
   font-weight: 700;
   font-size: 1rem;
@@ -59,12 +171,18 @@
   letter-spacing: 2px;
   font-size: 1.5rem;
   font-family: 'SF Mono', 'Fira Code', 'Courier New', monospace;
+  transform: translateY(3px);
 }
 
 .total-points {
-  color: #64748b;
-  font-size: 1rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  align-self: center;
+  color: #f1f5f9;
+  font-size: 1.5rem;
   font-weight: 600;
+  line-height: 1;
 }
 
 /* Team name wrapper for card positioning */
@@ -140,11 +258,44 @@
 /* Config Panel */
 .config-panel {
   display: flex;
+  align-content: flex-start;
   gap: 20px;
   padding: 20px;
   flex-wrap: wrap;
   background: #f1f5f9;
   min-height: calc(100vh - 120px);
+}
+
+.control-tabs {
+  flex-basis: 100%;
+  display: flex;
+  border-bottom: 1px solid #e2e8f0;
+  background: #fff;
+}
+
+.control-tab {
+  padding: 10px 16px;
+  border: 0;
+  border-bottom: 2px solid transparent;
+  background: transparent;
+  color: #94a3b8;
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.control-tab.active {
+  color: #dc2626;
+  border-bottom-color: #dc2626;
+}
+
+.config-divider {
+  margin: 16px 0;
+  border-top: 1px solid #cbd5e1;
+}
+
+.team-colors-section h3 {
+  margin-bottom: 14px;
 }
 
 .config-section {
@@ -223,6 +374,12 @@
   color: #1e293b;
 }
 
+.score-adjust-buttons {
+  display: inline-flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
 .score-separator {
   font-weight: bold;
   color: #cbd5e1;
@@ -238,7 +395,9 @@
   font-size: 0.9rem;
   color: #475569;
   font-weight: 600;
-  transition: background 0.12s, border-color 0.12s;
+  transition:
+    background 0.12s,
+    border-color 0.12s;
 }
 
 .btn-sm:hover {
@@ -259,7 +418,9 @@
   font-size: 0.875rem;
   color: #475569;
   font-weight: 600;
-  transition: background 0.12s, border-color 0.12s;
+  transition:
+    background 0.12s,
+    border-color 0.12s;
 }
 
 .btn:hover {
@@ -330,7 +491,7 @@
   font-weight: 500;
 }
 
-.color-row input[type="color"] {
+.color-row input[type='color'] {
   width: 44px;
   height: 32px;
   border: 1px solid #e2e8f0;
