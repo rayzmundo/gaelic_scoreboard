@@ -9,7 +9,10 @@
 
 .scoreboard-bar-new {
   background: #00ff00;
+  border: 0;
+  outline: none;
   box-shadow: none;
+  filter: none;
 }
 
 .scoreboard-inner {
@@ -40,8 +43,9 @@
   gap: 8px;
   padding: 10px 16px;
   background: #111827;
-  border-top: 0;
+  border: 0;
   border-radius: 14px;
+  box-shadow: none;
 }
 
 .scoreboard-2-team {
@@ -106,8 +110,9 @@
   margin: 0 auto -3px;
   padding: 6px 14px 8px;
   background: #111827;
-  border-bottom: 0;
+  border: 0;
   border-radius: 12px 12px 0 0;
+  box-shadow: none;
 }
 
 .scoreboard-2-time,
