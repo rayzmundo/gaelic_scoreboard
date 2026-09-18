@@ -23,7 +23,8 @@
 }
 
 .scoreboard-2-layout {
-  width: min(1100px, calc(100vw - 32px));
+  width: fit-content;
+  max-width: calc(100vw - 32px);
   color: #fff;
   font-weight: bold;
 }
@@ -37,22 +38,47 @@
 
 .scoreboard-2-main-row {
   gap: 8px;
-  padding: 16px 24px;
+  padding: 10px 16px;
   background: #111827;
   border: 3px solid #fff;
-  border-radius: 14px 14px 0 0;
+  border-radius: 14px;
 }
 
 .scoreboard-2-team {
-  flex: 1 1 0;
-  min-width: 0;
-  padding: 8px 16px;
+  padding: 8px 8px;
   background: #334155;
   border-radius: 8px;
   font-size: 1.1rem;
   text-align: center;
   text-transform: uppercase;
   white-space: nowrap;
+}
+
+.scoreboard-2-team-wrapper {
+  position: relative;
+  display: inline-flex;
+  flex: 0 1 auto;
+  max-width: 34%;
+  flex-direction: column;
+  align-items: center;
+}
+
+.scoreboard-2-cards {
+  position: absolute;
+  top: calc(100% - 10px);
+  right: 8px;
+  z-index: 2;
+  display: inline-flex;
+  justify-content: center;
+  gap: 4px;
+}
+
+.scoreboard-2-cards .card-icon {
+  width: 12px;
+  height: 17px;
+  border-width: 1px;
+  font-size: 0.6rem;
+  line-height: 17px;
 }
 
 .scoreboard-2-score {
@@ -78,11 +104,11 @@
   gap: 10px;
   width: fit-content;
   margin: -3px auto 0;
-  padding: 8px 18px 10px;
+  padding: 6px 14px 8px;
   background: #111827;
   border: 3px solid #fff;
   border-top: 0;
-  border-radius: 0 0 14px 14px;
+  border-radius: 0 0 12px 12px;
 }
 
 .scoreboard-2-time,

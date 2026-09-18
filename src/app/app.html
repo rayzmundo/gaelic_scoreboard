@@ -18,12 +18,24 @@
     @if (activeTab() === 'new-scoreboard') {
       <div class="scoreboard-2-layout">
         <div class="scoreboard-2-main-row">
-          <span
-            class="scoreboard-2-team"
-            [style.background]="team1ColorStyle()"
-            [style.color]="teamNameTextColor(team1Color())"
-            >{{ team1Name() }}</span
-          >
+          <span class="scoreboard-2-team-wrapper">
+            <span
+              class="scoreboard-2-team"
+              [style.background]="team1ColorStyle()"
+              [style.color]="teamNameTextColor(team1Color())"
+              >{{ team1Name() }}</span
+            >
+            @if (team1BlackCards() > 0 || team1RedCards() > 0) {
+              <span class="scoreboard-2-cards">
+                @if (team1BlackCards() > 0) {
+                  <span class="card-icon card-black">{{ team1BlackCards() > 1 ? team1BlackCards() : '' }}</span>
+                }
+                @if (team1RedCards() > 0) {
+                  <span class="card-icon card-red">{{ team1RedCards() > 1 ? team1RedCards() : '' }}</span>
+                }
+              </span>
+            }
+          </span>
           <span class="scoreboard-2-score">
             <span>{{ formatScore(team1Goals(), team1TwoPointers(), team1Points()) }}</span>
             <span class="scoreboard-2-total">({{ team1Total() }})</span>
@@ -31,12 +43,24 @@
             <span class="scoreboard-2-total">({{ team2Total() }})</span>
             <span>{{ formatScore(team2Goals(), team2TwoPointers(), team2Points()) }}</span>
           </span>
-          <span
-            class="scoreboard-2-team"
-            [style.background]="team2ColorStyle()"
-            [style.color]="teamNameTextColor(team2Color())"
-            >{{ team2Name() }}</span
-          >
+          <span class="scoreboard-2-team-wrapper">
+            <span
+              class="scoreboard-2-team"
+              [style.background]="team2ColorStyle()"
+              [style.color]="teamNameTextColor(team2Color())"
+              >{{ team2Name() }}</span
+            >
+            @if (team2BlackCards() > 0 || team2RedCards() > 0) {
+              <span class="scoreboard-2-cards">
+                @if (team2BlackCards() > 0) {
+                  <span class="card-icon card-black">{{ team2BlackCards() > 1 ? team2BlackCards() : '' }}</span>
+                }
+                @if (team2RedCards() > 0) {
+                  <span class="card-icon card-red">{{ team2RedCards() > 1 ? team2RedCards() : '' }}</span>
+                }
+              </span>
+            }
+          </span>
         </div>
         <div class="scoreboard-2-status-row">
           <span class="scoreboard-2-half">{{ half() === 1 ? '1st' : '2nd' }}</span>
