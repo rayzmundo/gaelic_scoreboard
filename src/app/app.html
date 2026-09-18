@@ -17,6 +17,12 @@
   <div class="scoreboard-bar" [class.scoreboard-bar-new]="activeTab() === 'new-scoreboard'">
     @if (activeTab() === 'new-scoreboard') {
       <div class="scoreboard-2-layout">
+        <div class="scoreboard-2-status-row">
+          <span class="scoreboard-2-half">{{ half() === 1 ? '1st' : '2nd' }}</span>
+          <span class="scoreboard-2-time" [class.time-overrun]="timeOverrun()">
+            {{ timeDisplay() }}
+          </span>
+        </div>
         <div class="scoreboard-2-main-row">
           <span class="scoreboard-2-team-wrapper">
             <span
@@ -60,12 +66,6 @@
                 }
               </span>
             }
-          </span>
-        </div>
-        <div class="scoreboard-2-status-row">
-          <span class="scoreboard-2-half">{{ half() === 1 ? '1st' : '2nd' }}</span>
-          <span class="scoreboard-2-time" [class.time-overrun]="timeOverrun()">
-            {{ timeDisplay() }}
           </span>
         </div>
       </div>
@@ -143,6 +143,31 @@
 <!-- Scoreboard Tab -->
 @if (activeTab() === 'scoreboard' || activeTab() === 'new-scoreboard') {
   <div class="config-panel">
+    <div class="control-tabs">
+      <button
+        class="control-tab"
+        [class.active]="controlTab() === 'teams'"
+        (click)="setControlTab('teams')"
+      >
+        Teams/Scores
+      </button>
+      <button
+        class="control-tab"
+        [class.active]="controlTab() === 'cards'"
+        (click)="setControlTab('cards')"
+      >
+        Cards
+      </button>
+      <button
+        class="control-tab"
+        [class.active]="controlTab() === 'time'"
+        (click)="setControlTab('time')"
+      >
+        Time
+      </button>
+    </div>
+
+    @if (controlTab() === 'teams') {
     <!-- Teams/Scores Section -->
     <div class="config-section">
       <h3>Teams/Scores</h3>
@@ -264,7 +289,9 @@
         </div>
       </div>
     </div>
+    }
 
+    @if (controlTab() === 'cards') {
     <!-- Cards Section -->
     <div class="config-section">
       <h3>Cards</h3>
@@ -287,7 +314,9 @@
         <button class="btn-sm" (click)="adjustCard(2, 'red', -1)">-</button>
       </div>
     </div>
+    }
 
+    @if (controlTab() === 'time') {
     <!-- Time Section -->
     <div class="config-section">
       <h3>Time</h3>
@@ -309,5 +338,6 @@
         <button class="btn" (click)="setSecondHalf()">Set Second half</button>
       </div>
     </div>
+    }
   </div>
 }

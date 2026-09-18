@@ -41,6 +41,7 @@
   padding: 10px 16px;
   background: #111827;
   border: 3px solid #fff;
+  border-top: 0;
   border-radius: 14px;
 }
 
@@ -103,12 +104,12 @@
 .scoreboard-2-status-row {
   gap: 10px;
   width: fit-content;
-  margin: -3px auto 0;
+  margin: 0 auto -3px;
   padding: 6px 14px 8px;
   background: #111827;
   border: 3px solid #fff;
-  border-top: 0;
-  border-radius: 0 0 12px 12px;
+  border-bottom: 0;
+  border-radius: 12px 12px 0 0;
 }
 
 .scoreboard-2-time,
@@ -259,11 +260,35 @@
 /* Config Panel */
 .config-panel {
   display: flex;
+  align-content: flex-start;
   gap: 20px;
   padding: 20px;
   flex-wrap: wrap;
   background: #f1f5f9;
   min-height: calc(100vh - 120px);
+}
+
+.control-tabs {
+  flex-basis: 100%;
+  display: flex;
+  border-bottom: 1px solid #e2e8f0;
+  background: #fff;
+}
+
+.control-tab {
+  padding: 10px 16px;
+  border: 0;
+  border-bottom: 2px solid transparent;
+  background: transparent;
+  color: #94a3b8;
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.control-tab.active {
+  color: #dc2626;
+  border-bottom-color: #dc2626;
 }
 
 .config-divider {

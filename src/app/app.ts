@@ -10,6 +10,7 @@ import { FormsModule } from '@angular/forms';
 export class App implements OnDestroy {
   // Tab state
   activeTab = signal<'scoreboard' | 'new-scoreboard'>('scoreboard');
+  controlTab = signal<'teams' | 'cards' | 'time'>('teams');
 
   // Half indicator
   half = signal<1 | 2>(1);
@@ -98,6 +99,10 @@ export class App implements OnDestroy {
   // Tab switching
   setTab(tab: 'scoreboard' | 'new-scoreboard') {
     this.activeTab.set(tab);
+  }
+
+  setControlTab(tab: 'teams' | 'cards' | 'time') {
+    this.controlTab.set(tab);
   }
 
   // Template input handlers
