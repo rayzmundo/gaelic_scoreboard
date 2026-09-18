@@ -253,6 +253,16 @@
             [value]="team1Color()"
             (input)="setTeam1Color($any($event.target).value)"
           />
+          <input
+            class="color-hex-input"
+            type="text"
+            [value]="team1Color()"
+            maxlength="7"
+            placeholder="#008000"
+            aria-label="{{ team1Name() }} primary color hex"
+            (change)="setTeam1ColorHex($any($event.target).value)"
+            (keydown.enter)="$any($event.target).blur()"
+          />
         </div>
         <div class="color-row">
           <label>{{ team1Name() }} secondary:</label>
@@ -260,6 +270,16 @@
             type="color"
             [value]="team1SecondaryColor()"
             (input)="setTeam1SecondaryColor($any($event.target).value)"
+          />
+          <input
+            class="color-hex-input"
+            type="text"
+            [value]="team1SecondaryColor()"
+            maxlength="7"
+            placeholder="#ffffff"
+            aria-label="{{ team1Name() }} secondary color hex"
+            (change)="setTeam1SecondaryColorHex($any($event.target).value)"
+            (keydown.enter)="$any($event.target).blur()"
           />
         </div>
         <div class="color-row">
@@ -269,6 +289,16 @@
             [value]="team2Color()"
             (input)="setTeam2Color($any($event.target).value)"
           />
+          <input
+            class="color-hex-input"
+            type="text"
+            [value]="team2Color()"
+            maxlength="7"
+            placeholder="#cc0000"
+            aria-label="{{ team2Name() }} primary color hex"
+            (change)="setTeam2ColorHex($any($event.target).value)"
+            (keydown.enter)="$any($event.target).blur()"
+          />
         </div>
         <div class="color-row">
           <label>{{ team2Name() }} secondary:</label>
@@ -276,6 +306,16 @@
             type="color"
             [value]="team2SecondaryColor()"
             (input)="setTeam2SecondaryColor($any($event.target).value)"
+          />
+          <input
+            class="color-hex-input"
+            type="text"
+            [value]="team2SecondaryColor()"
+            maxlength="7"
+            placeholder="#ffffff"
+            aria-label="{{ team2Name() }} secondary color hex"
+            (change)="setTeam2SecondaryColorHex($any($event.target).value)"
+            (keydown.enter)="$any($event.target).blur()"
           />
         </div>
         <div class="config-divider"></div>
