@@ -14,101 +14,106 @@
 
 <!-- Scoreboard Display Bar -->
 @if (activeTab() === 'scoreboard' || activeTab() === 'new-scoreboard') {
-<div
-  class="scoreboard-bar"
-  [class.scoreboard-bar-new]="activeTab() === 'new-scoreboard'"
->
-  @if (activeTab() === 'new-scoreboard') {
-    <div class="scoreboard-2-layout">
-      <div class="scoreboard-2-main-row">
-        <span
-          class="scoreboard-2-team"
-          [style.background]="team1ColorStyle()"
-          [style.color]="teamNameTextColor(team1Color())"
-        >{{ team1Name() }}</span>
-        <span class="scoreboard-2-score">
-          <span>{{ formatScore(team1Goals(), team1TwoPointers(), team1Points()) }}</span>
-          <span class="scoreboard-2-total">({{ team1Total() }})</span>
-          <span class="scoreboard-2-divider">-</span>
-          <span class="scoreboard-2-total">({{ team2Total() }})</span>
-          <span>{{ formatScore(team2Goals(), team2TwoPointers(), team2Points()) }}</span>
-        </span>
-        <span
-          class="scoreboard-2-team"
-          [style.background]="team2ColorStyle()"
-          [style.color]="teamNameTextColor(team2Color())"
-        >{{ team2Name() }}</span>
+  <div class="scoreboard-bar" [class.scoreboard-bar-new]="activeTab() === 'new-scoreboard'">
+    @if (activeTab() === 'new-scoreboard') {
+      <div class="scoreboard-2-layout">
+        <div class="scoreboard-2-main-row">
+          <span
+            class="scoreboard-2-team"
+            [style.background]="team1ColorStyle()"
+            [style.color]="teamNameTextColor(team1Color())"
+            >{{ team1Name() }}</span
+          >
+          <span class="scoreboard-2-score">
+            <span>{{ formatScore(team1Goals(), team1TwoPointers(), team1Points()) }}</span>
+            <span class="scoreboard-2-total">({{ team1Total() }})</span>
+            <span class="scoreboard-2-divider">-</span>
+            <span class="scoreboard-2-total">({{ team2Total() }})</span>
+            <span>{{ formatScore(team2Goals(), team2TwoPointers(), team2Points()) }}</span>
+          </span>
+          <span
+            class="scoreboard-2-team"
+            [style.background]="team2ColorStyle()"
+            [style.color]="teamNameTextColor(team2Color())"
+            >{{ team2Name() }}</span
+          >
+        </div>
+        <div class="scoreboard-2-status-row">
+          <span class="scoreboard-2-half">{{ half() === 1 ? '1st' : '2nd' }}</span>
+          <span class="scoreboard-2-time" [class.time-overrun]="timeOverrun()">
+            {{ timeDisplay() }}
+          </span>
+        </div>
       </div>
-      <div class="scoreboard-2-status-row">
-        <span class="scoreboard-2-half">{{ half() === 1 ? '1st' : '2nd' }}</span>
-        <span class="scoreboard-2-time" [class.time-overrun]="timeOverrun()">
-          {{ timeDisplay() }}
+    } @else {
+      <div class="scoreboard-inner">
+        <span class="half-indicator">{{ half() === 1 ? '1st' : '2nd' }}</span>
+        <span class="time-display" [class.time-overrun]="timeOverrun()">{{ timeDisplay() }}</span>
+        <span class="team-name-wrapper">
+          <span
+            class="team-name"
+            [style.background]="team1ColorStyle()"
+            [style.color]="teamNameTextColor(team1Color())"
+            >{{ team1Name() }}</span
+          >
+          @if (team1BlackCards() > 0 || team1RedCards() > 0) {
+            <span class="scoreboard-cards">
+              @if (team1BlackCards() > 0) {
+                <span class="card-icon card-black">
+                  @if (team1BlackCards() > 1) {
+                    {{ team1BlackCards() }}
+                  }
+                </span>
+              }
+              @if (team1RedCards() > 0) {
+                <span class="card-icon card-red">
+                  @if (team1RedCards() > 1) {
+                    {{ team1RedCards() }}
+                  }
+                </span>
+              }
+            </span>
+          }
+        </span>
+
+        <span class="score">{{
+          formatScore(team1Goals(), team1TwoPointers(), team1Points())
+        }}</span>
+        <span class="total-points">({{ team1Total() }})</span>
+        <span class="total-points">({{ team2Total() }})</span>
+        <span class="score">{{
+          formatScore(team2Goals(), team2TwoPointers(), team2Points())
+        }}</span>
+
+        <span class="team-name-wrapper">
+          <span
+            class="team-name"
+            [style.background]="team2ColorStyle()"
+            [style.color]="teamNameTextColor(team2Color())"
+            >{{ team2Name() }}</span
+          >
+          @if (team2BlackCards() > 0 || team2RedCards() > 0) {
+            <span class="scoreboard-cards">
+              @if (team2BlackCards() > 0) {
+                <span class="card-icon card-black">
+                  @if (team2BlackCards() > 1) {
+                    {{ team2BlackCards() }}
+                  }
+                </span>
+              }
+              @if (team2RedCards() > 0) {
+                <span class="card-icon card-red">
+                  @if (team2RedCards() > 1) {
+                    {{ team2RedCards() }}
+                  }
+                </span>
+              }
+            </span>
+          }
         </span>
       </div>
-    </div>
-  } @else {
-  <div class="scoreboard-inner">
-    <span class="half-indicator">{{ half() === 1 ? '1st' : '2nd' }}</span>
-    <span class="time-display" [class.time-overrun]="timeOverrun()">{{ timeDisplay() }}</span>
-    <span class="team-name-wrapper">
-      <span
-        class="team-name"
-        [style.background]="team1ColorStyle()"
-        [style.color]="teamNameTextColor(team1Color())"
-      >{{ team1Name() }}</span>
-      @if (team1BlackCards() > 0 || team1RedCards() > 0) {
-        <span class="scoreboard-cards">
-          @if (team1BlackCards() > 0) {
-            <span class="card-icon card-black">
-              @if (team1BlackCards() > 1) {
-                {{ team1BlackCards() }}
-              }
-            </span>
-          }
-          @if (team1RedCards() > 0) {
-            <span class="card-icon card-red">
-              @if (team1RedCards() > 1) {
-                {{ team1RedCards() }}
-              }
-            </span>
-          }
-        </span>
-      }
-    </span>
-
-    <span class="score">{{ formatScore(team1Goals(), team1TwoPointers(), team1Points()) }}</span>
-    <span class="total-points">({{ team1Total() }})</span>
-    <span class="total-points">({{ team2Total() }})</span>
-    <span class="score">{{ formatScore(team2Goals(), team2TwoPointers(), team2Points()) }}</span>
-
-    <span class="team-name-wrapper">
-      <span
-        class="team-name"
-        [style.background]="team2ColorStyle()"
-        [style.color]="teamNameTextColor(team2Color())"
-      >{{ team2Name() }}</span>
-      @if (team2BlackCards() > 0 || team2RedCards() > 0) {
-        <span class="scoreboard-cards">
-          @if (team2BlackCards() > 0) {
-            <span class="card-icon card-black">
-              @if (team2BlackCards() > 1) {
-                {{ team2BlackCards() }}
-              }
-            </span>
-          }
-          @if (team2RedCards() > 0) {
-            <span class="card-icon card-red">
-              @if (team2RedCards() > 1) {
-                {{ team2RedCards() }}
-              }
-            </span>
-          }
-        </span>
-      }
-    </span>
+    }
   </div>
-  }
-</div>
 }
 
 <!-- Scoreboard Tab -->
@@ -135,20 +140,26 @@
           class="team-input"
         />
         <span class="score-value">{{ team1Goals() }}</span>
-        <button class="btn-sm" (click)="adjustGoals(1, 1)">+</button>
-        <button class="btn-sm" (click)="adjustGoals(1, -1)">-</button>
+        <span class="score-adjust-buttons">
+          <button class="btn-sm" (click)="adjustGoals(1, 1)">+</button>
+          <button class="btn-sm" (click)="adjustGoals(1, -1)">-</button>
+        </span>
         <span class="score-separator">-</span>
         @if (showTwoPointers()) {
           <span class="score-value">{{ padTwo(team1TwoPointers()) }}</span>
         }
         @if (showTwoPointers()) {
-          <button class="btn-sm" (click)="adjustTwoPointers(1, 1)">+</button>
-          <button class="btn-sm" (click)="adjustTwoPointers(1, -1)">-</button>
+          <span class="score-adjust-buttons">
+            <button class="btn-sm" (click)="adjustTwoPointers(1, 1)">+</button>
+            <button class="btn-sm" (click)="adjustTwoPointers(1, -1)">-</button>
+          </span>
         }
         <span class="score-separator">-</span>
         <span class="score-value">{{ padTwo(team1Points()) }}</span>
-        <button class="btn-sm" (click)="adjustPoints(1, 1)">+</button>
-        <button class="btn-sm" (click)="adjustPoints(1, -1)">-</button>
+        <span class="score-adjust-buttons">
+          <button class="btn-sm" (click)="adjustPoints(1, 1)">+</button>
+          <button class="btn-sm" (click)="adjustPoints(1, -1)">-</button>
+        </span>
       </div>
       <div class="team-row">
         <label class="team-label">Away</label>
@@ -159,20 +170,26 @@
           class="team-input"
         />
         <span class="score-value">{{ team2Goals() }}</span>
-        <button class="btn-sm" (click)="adjustGoals(2, 1)">+</button>
-        <button class="btn-sm" (click)="adjustGoals(2, -1)">-</button>
+        <span class="score-adjust-buttons">
+          <button class="btn-sm" (click)="adjustGoals(2, 1)">+</button>
+          <button class="btn-sm" (click)="adjustGoals(2, -1)">-</button>
+        </span>
         <span class="score-separator">-</span>
         @if (showTwoPointers()) {
           <span class="score-value">{{ padTwo(team2TwoPointers()) }}</span>
         }
         @if (showTwoPointers()) {
-          <button class="btn-sm" (click)="adjustTwoPointers(2, 1)">+</button>
-          <button class="btn-sm" (click)="adjustTwoPointers(2, -1)">-</button>
+          <span class="score-adjust-buttons">
+            <button class="btn-sm" (click)="adjustTwoPointers(2, 1)">+</button>
+            <button class="btn-sm" (click)="adjustTwoPointers(2, -1)">-</button>
+          </span>
         }
         <span class="score-separator">-</span>
         <span class="score-value">{{ padTwo(team2Points()) }}</span>
-        <button class="btn-sm" (click)="adjustPoints(2, 1)">+</button>
-        <button class="btn-sm" (click)="adjustPoints(2, -1)">-</button>
+        <span class="score-adjust-buttons">
+          <button class="btn-sm" (click)="adjustPoints(2, 1)">+</button>
+          <button class="btn-sm" (click)="adjustPoints(2, -1)">-</button>
+        </span>
       </div>
 
       <div class="config-divider"></div>
@@ -270,4 +287,3 @@
     </div>
   </div>
 }
-

@@ -30,10 +30,12 @@ export class App implements OnDestroy {
   team2Color = signal('#cc0000');
   team2SecondaryColor = signal('#ffffff');
   team1ColorStyle = computed(
-    () => `linear-gradient(180deg, ${this.team1Color()} 0 90%, ${this.team1SecondaryColor()} 90% 100%)`,
+    () =>
+      `linear-gradient(180deg, ${this.team1Color()} 0 90%, ${this.team1SecondaryColor()} 90% 100%)`,
   );
   team2ColorStyle = computed(
-    () => `linear-gradient(180deg, ${this.team2Color()} 0 90%, ${this.team2SecondaryColor()} 90% 100%)`,
+    () =>
+      `linear-gradient(180deg, ${this.team2Color()} 0 90%, ${this.team2SecondaryColor()} 90% 100%)`,
   );
 
   // Team 1 score
