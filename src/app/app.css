@@ -367,6 +367,23 @@
   border-color: #94a3b8;
 }
 
+.color-hex-input {
+  width: 78px;
+  padding: 5px 7px;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  background: #f8fafc;
+  color: #1e293b;
+  font-family: 'SF Mono', 'Fira Code', 'Courier New', monospace;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+}
+
+.color-hex-input:focus {
+  outline: none;
+  border-color: #94a3b8;
+}
+
 .score-value {
   font-weight: 700;
   min-width: 20px;

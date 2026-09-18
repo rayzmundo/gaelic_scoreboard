@@ -118,17 +118,37 @@ export class App implements OnDestroy {
     this.team1Color.set(value);
     this.saveState();
   }
+  setTeam1ColorHex(value: string) {
+    if (/^#[0-9a-fA-F]{6}$/.test(value.trim())) {
+      this.setTeam1Color(value.trim().toLowerCase());
+    }
+  }
   setTeam1SecondaryColor(value: string) {
     this.team1SecondaryColor.set(value);
     this.saveState();
+  }
+  setTeam1SecondaryColorHex(value: string) {
+    if (/^#[0-9a-fA-F]{6}$/.test(value.trim())) {
+      this.setTeam1SecondaryColor(value.trim().toLowerCase());
+    }
   }
   setTeam2Color(value: string) {
     this.team2Color.set(value);
     this.saveState();
   }
+  setTeam2ColorHex(value: string) {
+    if (/^#[0-9a-fA-F]{6}$/.test(value.trim())) {
+      this.setTeam2Color(value.trim().toLowerCase());
+    }
+  }
   setTeam2SecondaryColor(value: string) {
     this.team2SecondaryColor.set(value);
     this.saveState();
+  }
+  setTeam2SecondaryColorHex(value: string) {
+    if (/^#[0-9a-fA-F]{6}$/.test(value.trim())) {
+      this.setTeam2SecondaryColor(value.trim().toLowerCase());
+    }
   }
 
   setShowTwoPointers(value: boolean) {
