@@ -82,7 +82,7 @@ export class App implements OnDestroy {
   // Score display helpers
   formatScore(goals: number, twoPointers: number, points: number): string {
     if (this.showTwoPointers()) {
-      return goals + '-' + this.padTwo(twoPointers) + '-' + this.padTwo(points);
+      return goals + '-' + twoPointers + '-' + this.padTwo(points);
     }
     // Old Gaelic view: show goals and points only
     return goals + '-' + this.padTwo(points);

@@ -43,11 +43,27 @@
             }
           </span>
           <span class="scoreboard-2-score">
-            <span>{{ formatScore(team1Goals(), team1TwoPointers(), team1Points()) }}</span>
+            <span class="score-parts">
+              <span class="score-goals">{{ team1Goals() }}</span>
+              <span>-</span>
+              @if (showTwoPointers()) {
+                <span class="score-two-pointers">{{ team1TwoPointers() }}</span>
+                <span>-</span>
+              }
+              <span>{{ padTwo(team1Points()) }}</span>
+            </span>
             <span class="scoreboard-2-total">({{ team1Total() }})</span>
             <span class="scoreboard-2-divider">-</span>
             <span class="scoreboard-2-total">({{ team2Total() }})</span>
-            <span>{{ formatScore(team2Goals(), team2TwoPointers(), team2Points()) }}</span>
+            <span class="score-parts">
+              <span class="score-goals">{{ team2Goals() }}</span>
+              <span>-</span>
+              @if (showTwoPointers()) {
+                <span class="score-two-pointers">{{ team2TwoPointers() }}</span>
+                <span>-</span>
+              }
+              <span>{{ padTwo(team2Points()) }}</span>
+            </span>
           </span>
           <span class="scoreboard-2-team-wrapper">
             <span
@@ -100,14 +116,26 @@
           }
         </span>
 
-        <span class="score">{{
-          formatScore(team1Goals(), team1TwoPointers(), team1Points())
-        }}</span>
+        <span class="score score-parts">
+          <span class="score-goals">{{ team1Goals() }}</span>
+          <span>-</span>
+          @if (showTwoPointers()) {
+            <span class="score-two-pointers">{{ team1TwoPointers() }}</span>
+            <span>-</span>
+          }
+          <span>{{ padTwo(team1Points()) }}</span>
+        </span>
         <span class="total-points">({{ team1Total() }})</span>
         <span class="total-points">({{ team2Total() }})</span>
-        <span class="score">{{
-          formatScore(team2Goals(), team2TwoPointers(), team2Points())
-        }}</span>
+        <span class="score score-parts">
+          <span class="score-goals">{{ team2Goals() }}</span>
+          <span>-</span>
+          @if (showTwoPointers()) {
+            <span class="score-two-pointers">{{ team2TwoPointers() }}</span>
+            <span>-</span>
+          }
+          <span>{{ padTwo(team2Points()) }}</span>
+        </span>
 
         <span class="team-name-wrapper">
           <span
@@ -195,7 +223,7 @@
         </span>
         <span class="score-separator">-</span>
         @if (showTwoPointers()) {
-          <span class="score-value">{{ padTwo(team1TwoPointers()) }}</span>
+          <span class="score-value">{{ team1TwoPointers() }}</span>
         }
         @if (showTwoPointers()) {
           <span class="score-adjust-buttons">
@@ -225,7 +253,7 @@
         </span>
         <span class="score-separator">-</span>
         @if (showTwoPointers()) {
-          <span class="score-value">{{ padTwo(team2TwoPointers()) }}</span>
+          <span class="score-value">{{ team2TwoPointers() }}</span>
         }
         @if (showTwoPointers()) {
           <span class="score-adjust-buttons">

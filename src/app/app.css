@@ -41,10 +41,11 @@
 
 .scoreboard-2-main-row {
   gap: 8px;
-  padding: 10px 16px;
+  padding: 5px 8px;
   background: #111827;
   border: 0;
-  border-radius: 14px;
+  border-radius: 0;
+  clip-path: polygon(8px 0, calc(100% - 8px) 0, 100% 8px, 100% calc(100% - 8px), calc(100% - 8px) 100%, 8px 100%, 0 calc(100% - 8px), 0 8px);
   box-shadow: none;
 }
 
@@ -108,10 +109,11 @@
   gap: 10px;
   width: fit-content;
   margin: 0 auto -3px;
-  padding: 6px 14px 8px;
+  padding: 3px 7px 4px;
   background: #111827;
   border: 0;
-  border-radius: 12px 12px 0 0;
+  border-radius: 0;
+  clip-path: polygon(7px 0, calc(100% - 7px) 0, 100% 7px, 100% 100%, 0 100%, 0 7px);
   box-shadow: none;
 }
 
@@ -177,6 +179,19 @@
   font-size: 1.5rem;
   font-family: 'SF Mono', 'Fira Code', 'Courier New', monospace;
   transform: translateY(3px);
+}
+
+.score-parts {
+  display: inline-flex;
+  align-items: center;
+}
+
+.score-goals {
+  color: #22c55e;
+}
+
+.score-two-pointers {
+  color: #facc15;
 }
 
 .total-points {
